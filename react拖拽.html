@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        class Demo extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    left:0,
+                    top:0,
+                    style:{
+                        width:"100px",
+                        height:"100px",
+                        borderRadius:"10px",
+                        backgroundColor:"red",
+                        position:'absolute',
+                        left:0,
+                        top:0
+                    }
+                };
+                this.oDiv = null;
+                this.disX = 0;
+                this.disY = 0;
+            }
+            handelDown = (ev)=>{
+                this.oDiv = ev.target;
+                this.disX = ev.clientX - this.oDiv.offsetLeft;
+                this.disY = ev.clientY - this.oDiv.offsetTop;
+                document.onmousemove = this.handelMove.bind(this);
+                document.onmouseup = this.handelUp.bind(this);
+            }
+            handelMove = (ev)=>{
+                this.setState({
+                    left:ev.clientX - this.disX,
+                    top:ev.clientY - this.disY
+                },()=>{
+                    
+                    if(this.state.left<=0){
+                        this.state.left = 0;
+                    }
+                    if(this.state.top<=0){
+                        this.state.top = 0;
+                    }
+                    this.oDiv.style.left = this.state.left+"px";
+                    this.oDiv.style.top = this.state.top+"px";
+                });
+            }
+            handelUp = ()=>{
+                document.onmouseup = document.onmousemove = null;
+            }
+            render(){
+                return(
+                    <div onMouseDown={this.handelDown} style={this.state.style}></div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Demo/>,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

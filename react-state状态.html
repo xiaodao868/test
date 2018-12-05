@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        /***
+        * state 状态  效果++
+        **/
+        let {Component} = React;
+        class DemoState extends Component{
+            constructor(props){//构造函数
+                super(props);                
+                this.state = {
+                    value:0
+                }
+            }
+            add(){
+                let value = this.state.value
+                this.setState({
+                    value:value+1
+                })
+            }
+            render(){
+                return (<div>
+                    <input onClick={this.add.bind(this)} value="点击"  type="button"/>
+                    <p>{this.state.value}</p>
+                </div>)
+            }
+        }
+        ReactDOM.render(
+            <DemoState/>,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

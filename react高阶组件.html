@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        //高阶组件就是一个函数的参数是一个组件 然后这个函数又返回一个组件  就是高阶组件
+        //类的形势
+        function FnHOC(MyDemo) {
+            return class Mid extends React.Component{
+                render(){
+                    return(
+                        <div>
+                            <MyDemo title="class类">
+                                <h1>我是class类写的高阶组件</h1>
+                            </MyDemo>
+                        </div>
+                    )
+                }
+            }
+        }
+        class Demo extends React.Component{
+            render(){
+                return(
+                    <div>
+                        {this.props.title}
+                        {this.props.children}
+                    </div>
+                )
+            }
+        }
+        const  NewFnHOC = FnHOC(Demo);
+        ReactDOM.render(
+            <NewFnHOC/>,
+            document.getElementById("root")
+        );
+        //函数的形式
+        const FnHOCTow = (MyDemoTow)=>()=>(
+            <div>
+                <MyDemoTow title="函数的形式">
+                    <h1>我是函数构成的高阶组件</h1>    
+                </MyDemoTow>
+            </div>
+        )
+        const DemoTow = (props)=>(
+            <div>
+                {props.title}
+                {props.children}
+            </div>
+        )
+        const NewFnHOCTow = FnHOCTow(DemoTow);
+        ReactDOM.render(
+            <NewFnHOCTow/>,
+            document.getElementById("root2")
+        )
+
+
+        const You= ()=>(
+            <div>helloworld</div>
+        );
+        ReactDOM.render(
+            <You/>,
+            document.getElementById("xxx")
+        )
+    </script>
+</body>
+</html>

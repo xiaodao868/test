@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        class Demo extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    username:"",
+                    arr:["小明"]
+                }
+            }
+            inputVal = (ev)=>{
+                this.setState({
+                    username:ev.target.value
+                })
+            }
+            sbm = (ev)=>{
+                let arr = [...this.state.arr];
+                arr.unshift(this.state.username);
+                this.setState({
+                    arr,
+                    username:""
+                });
+                ev.preventDefault();
+            }
+            del = (index)=>{
+                let arr = [...this.state.arr];
+                arr.splice(index,1);
+                this.setState({
+                    arr
+                });
+            }
+            render(){
+                return(
+                    <div>
+                        <form onSubmit={this.sbm}>
+                            <input  onChange={this.inputVal} value={this.state.username} name="username" type="text" />
+                            <button>提交</button>    
+                        </form>
+                        <ul>
+                            {
+                                this.state.arr.map((item,index)=>
+                                    <li key={index}>
+                                        {index}
+                                        {item}
+                                        <a onClick={()=>this.del(index)} href="javascript:;">删除</a>
+                                    </li>   
+                                )
+                            }
+                             
+                        </ul>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Demo/>,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

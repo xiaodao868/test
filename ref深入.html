@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        /***
+         * 通过ref获取dom元素的方法：
+         * 1.this.refs.xxx  不推荐
+         * 2.通过函数的方式获取dom
+         * **/
+        //第一种通过this.refs.xxx
+        class Demo extends React.Component{
+            handelClick = ()=>{
+                this.refs.inputText.focus();
+            }
+            render(){
+                return(
+                    <div>
+                        <input ref="inputText" type="text"/>
+                        <input onClick={this.handelClick} type="button" value="聚焦"/>  
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Demo/>,
+            document.getElementById("root")
+        )
+        //二. 通过ref设置为函数的方法聚焦
+        class DemoTow extends React.Component{
+            handelClick = ()=>{
+                this.inputText.focus();
+            }
+            render(){
+                return(
+                    <div>
+                        <input ref={(inputText)=>this.inputText=inputText} type="text"/>
+                        <input onClick={this.handelClick} type="button" value="通过函数聚焦"/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <DemoTow/>,
+            document.getElementById("root2")
+        )
+        //三 父组件操作子组件
+        class ChildTherr extends React.Component{
+            show(){
+                this.input.style.display="block";
+            }
+            hide(){
+                this.input.style.display="none";
+            }
+            render(){
+                return(
+                    <input type="text" ref={(input)=>this.input=input}/>
+                )
+            }
+        }
+        class DemoTherr extends React.Component{
+            componentDidMount(){
+                //获取到input
+                this.input.show();
+            }
+            handelClick = ()=>{
+                this.input.hide();
+            }
+            render(){
+                return(
+                    <div>
+                        <ChildTherr ref={(input)=>this.input=input}/>
+                        <input onClick={this.handelClick} type="button" value="隐藏"/>    
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <DemoTherr/>,
+            document.getElementById("root3")
+        )
+    </script>
+</body>
+</html>

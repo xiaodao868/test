@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        /***
+         * react 初级 ：
+         * 1.react元素
+         * 2.react class style 事件 变量的应用
+         * class 要写成 className
+         * style 是个json 也可以...扩展操作符
+         * 事件要驼峰
+         * 变量要加{}号
+         * 单标记要加/闭合
+         * **/
+        function fn(user) {
+            if(user){
+                return <h3>欢迎{user.name}登录</h3>
+            }else{
+                return <h3>点击登录</h3>
+            }
+        }
+        let s = (<div>
+                <h3>react</h3>
+                <p>第一节</p>
+                <div>{fn({name:"小明"})}</div>
+            </div>);
+        ReactDOM.render(s,document.getElementById("root"));
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        class Liuyanban extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    text:"111"
+                }
+            }
+            handelChange = (e)=>{
+                console.log(e);
+            }
+            render(){
+                return(
+                    <div>
+                        <h1>请输入您的姓名:</h1>
+                        <input type="text" onChange={this.handelChange} value={this.state.text}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+        <Liuyanban/>,
+        document.getElementById('app')
+        );
+    </script>
+</body>
+</html>

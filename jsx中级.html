@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #root {
+      text-align: center;
+    }
+
+    .tit {
+      color: blue;
+      font-size: 48px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+
+  </div>
+  <script src="./lib/react.development.js"></script>
+  <script src="./lib/react-dom.development.js"></script>
+  <script src="./lib/babel.min.js"></script>
+  <script type="text/babel">
+        let stlyes = {
+          width:"200px",
+          height:"200px",
+          color:"#fff",
+          background:"#666",
+          fontSize:"24px",
+          margin:"0 auto",
+          marginTop:"20px"
+        }
+        // function tableContext(n){
+        //   return <div style={stlyes}>内容{n}</div>
+        // }
+        function tabBtn(n) {
+          alert(n)
+        }
+        let j = (
+            <div>
+                <h3 className="tit">React-Table选项卡</h3>
+                <input onClick={tabBtn(0)} type="button" value="标题一"/>    
+                <input onClick={tabBtn(1)} type="button" value="标题二"/>    
+                <input onClick={tabBtn(2)} type="button" value="标题三"/>
+                <div style={stlyes}>内容</div>
+            </div>
+        );
+        ReactDOM.render(j,document.getElementById("root"));
+    </script>
+</body>
+
+</html>

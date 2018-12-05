@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        /***
+        父子组件的通信方法  ：
+        父组件向子组件通信 使用props
+        子组件向父组件通信 使用函数回调的方式
+        **/
+        //父通子
+        class Childone extends React.Component{
+            render(){
+                return (
+                    <div>
+                        {this.props.msg}
+                    </div>
+                )
+                
+            }
+        }   
+        class Demo extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    msg:"我是父组件的数据"
+                }
+            }
+            render(){
+                return (
+                    <div>
+                        <Childone msg={this.state.msg}/>
+                    </div>
+                )
+                
+            }
+        };
+        ReactDOM.render(
+            <Demo/>,
+            document.getElementById("root")
+        );
+        //子通父
+        class Childtow extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    msg:"我是子数据"
+                }
+            }
+            
+            fnSend = ()=>{
+                this.props.aa(this.state.msg)
+            }
+            render(){
+                return(
+                    <div>
+                        <input onClick={this.fnSend} type="button" value="发送"/>
+                    </div>
+                )
+            }
+        }
+        class Demotow extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    msgextends:""
+                }
+            }
+            fn = (args)=>{
+                this.setState({
+                    msgextends:args
+                })
+            }
+            render(){
+                return (
+                    <div>
+                        {this.state.msgextends}
+                        <Childtow aa={this.fn}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Demotow/>,
+            document.getElementById("root2")
+        )
+    </script>
+</body>
+
+</html>

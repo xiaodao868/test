@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        let {Component} = React;
+        class Demo extends  Component{
+            constructor(){
+                super();
+                this.state = {
+                    username:"",
+                    age:""
+                }
+            }
+            formSbm = (ev)=>{
+                this.setState({
+                    [ev.target.name] :ev.target.value
+                });
+            }
+            sbm = (ev)=>{
+                let {username,age} = this.state;
+                alert(`${username},${age}`);
+                ev.preventDefault();
+            }
+            render(){
+                return(
+                    <div>
+                        <form onSubmit={this.sbm}>
+                            <label>
+                                姓名:
+                                <input onChange={this.formSbm} name="username" type="text" value={this.state.username} />
+                            </label>
+                            <label>
+                                年龄:
+                                <input onChange={this.formSbm} name="age" type="text" value={this.state.age}/>
+                            </label>
+                            <button>提交</button>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Demo/>,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

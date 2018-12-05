@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="root">
+    
+  </div>
+  <div id="rootTow">
+  
+  </div>
+  <script src="./lib/react.development.js"></script>
+  <script src="./lib/react-dom.development.js"></script>
+  <script src="./lib/babel.min.js"></script>
+  <script type="text/babel">
+    /***
+     * react 组件和props属性
+     * react组件声明有两种  一种是函数 一种是class类
+     * 
+     * 函数组件和类组件的区别是：
+     * 前者 无状态 
+     * 后者 有状态
+     * **/
+
+    //函数组件
+    function Title(props) {
+      let {name,title} = props
+      return <h3>{name}=>{title}</h3>
+    };
+    ReactDOM.render(
+      <Title name="我是函数组件" title="我通过props传递数据  该数据必须只读 
+      我的缺点是没有状态 this混乱 没有生命周期  我的优点是性能稍高？"/>,
+      document.getElementById("root")
+    );
+    //类组件
+    let {Component}  = React;
+    class TitleTow extends Component{
+      render(){
+        let {name,title} = this.props;
+        return <h3>{name}=>{title}</h3>
+      }
+    }
+    ReactDOM.render(
+      <TitleTow name="我是类组件" title="我通过this props传递数据 该数据只能读
+      我的缺点是性能没有函数组件高？ 优点是 有状态 有生命周期 this靠谱"/>,
+      document.getElementById("rootTow")
+    )
+  </script>
+</body>
+
+</html>

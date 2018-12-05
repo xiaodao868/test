@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        const {Component} = React;
+        const StateText = ({token})=>{
+            return token?<h2>欢迎管理员登录</h2>:<h2>您已退出</h2>
+        }
+        class App extends Component{
+            constructor(){
+                super();
+                this.state = {
+                    token:true
+                }
+            }
+            backlogin = ()=>{
+                this.setState({
+                   token:false 
+                })
+            }
+            login = ()=>{
+                this.setState({
+                   token:true 
+                })
+            }
+            render(){
+                let token = this.state.token;
+                let button = null;
+                if(token){
+                    button = <input onClick={this.backlogin} value="点我退出" type="button"/>;
+                }else{
+                    button = <input onClick={this.login} value="点击登录" type="button"/>;
+                }
+                return(
+                    <div>
+                        <StateText token={token}/>
+                        {button}
+                    </div>
+                )
+            }
+        };
+        ReactDOM.render(
+            <App/>,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

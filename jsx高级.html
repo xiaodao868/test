@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        
+    </div>
+    <div id="rootTow">
+        
+    </div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        /***
+         * 实现时钟功能、
+         * react diff算法 
+         * 虽然只是更新了一片代码 提供了渲染的性能 但是还是使用了diff算法
+         * **/
+        function fn(params) {
+            let j = (
+                <div>
+                    <h3>{new Date().toLocaleString()}</h3>    
+                </div>
+            );
+            ReactDOM.render(j,document.getElementById("root"));
+        };
+        setInterval(fn,1000);
+        //优化版  后面写
+        let j = (
+            <div>
+                <h3>优化版</h3>
+            </div>
+        );
+        ReactDOM.render(j,document.getElementById("rootTow"));
+    </script>
+</body>
+</html>
